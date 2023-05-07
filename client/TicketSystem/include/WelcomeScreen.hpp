@@ -1,5 +1,5 @@
 #pragma once
-
+#include <iostream>
 namespace TicketSystem {
 
 	using namespace System;
@@ -43,8 +43,7 @@ namespace TicketSystem {
 	private: System::Windows::Forms::CheckBox^ option1;
 	private: System::Windows::Forms::CheckBox^ option2;
 	private: System::Windows::Forms::CheckBox^ option3;
-
-
+	private: System::Windows::Forms::Label^ cinemaName;
 
 	private: System::ComponentModel::IContainer^ components;
 #pragma region Windows Form Designer generated code
@@ -126,12 +125,12 @@ namespace TicketSystem {
 			   this->PerformLayout();
 
 		   }
-		   void InitializeCinema();
+		   void ChooseCinema();
 #pragma endregion
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
 	private: System::Void cinemaHeadingListener(System::Object^ sender, System::EventArgs^ e) {}
 	private: System::Void btnBookListener(System::Object^ sender, System::EventArgs^ e) {
-		this->InitializeCinema();
+		this->ChooseCinema();
 		this->btnBook->Visible = false;
 		this->btnExit->Visible = false;
 
@@ -147,5 +146,6 @@ namespace TicketSystem {
 	}
 	private: System::Void btnExitListener(System::Object^ sender, System::EventArgs^ e) { Application::Exit(); }
 	private: System::Void WelcomeScreen_Load(System::Object^ sender, System::EventArgs^ e) {}
+	private: System::Void btnChooseListener(System::Object^ sender, System::EventArgs^ e);
 	};
 }

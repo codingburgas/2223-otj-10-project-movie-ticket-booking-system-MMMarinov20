@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "WelcomeScreen.hpp"
 
-void TicketSystem::WelcomeScreen::InitializeCinema() {
+void TicketSystem::WelcomeScreen::ChooseCinema() {
 	this->heading->AutoSize = true;
 	this->heading->Font = (gcnew System::Drawing::Font(L"Britannic Bold", 48, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 		static_cast<System::Byte>(0)));
@@ -31,6 +31,7 @@ void TicketSystem::WelcomeScreen::InitializeCinema() {
 	this->btnChoose->TabIndex = 1;
 	this->btnChoose->Text = L"Choose";
 	this->btnChoose->UseVisualStyleBackColor = false;
+	this->btnChoose->Click += gcnew System::EventHandler(this, &WelcomeScreen::btnChooseListener);
 
 	this->option1 = (gcnew System::Windows::Forms::CheckBox());
 	this->Controls->Add(this->option1);
@@ -67,5 +68,21 @@ void TicketSystem::WelcomeScreen::InitializeCinema() {
 	this->option3->TabIndex = 3;
 	this->option3->TabStop = true;
 	this->option3->Text = L"Option 3";
+}
+
+System::Void TicketSystem::WelcomeScreen::btnChooseListener(System::Object^ sender, System::EventArgs^ e) {
+	this->cinemaName = (gcnew System::Windows::Forms::Label());
+	this->Controls->Add(this->cinemaName);
+	this->cinemaName->AutoSize = true;
+	this->cinemaName->Font = (gcnew System::Drawing::Font(L"Arial", 24, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+		static_cast<System::Byte>(0)));
+	this->cinemaName->Location = System::Drawing::Point(0, 0);
+	this->cinemaName->Name = L"cinemaName";
+	this->cinemaName->Size = System::Drawing::Size(776, 71);
+	this->cinemaName->TabIndex = 4;
+	if (this->option1->Checked) this->cinemaName->Text = this->option1->Text;
+	else if (this->option2->Checked) this->cinemaName->Text = this->option2->Text;
+	else if (this->option3->Checked) this->cinemaName->Text = this->option3->Text;
+	else this->cinemaName->Text = "No cinema selected";
 	
 }
