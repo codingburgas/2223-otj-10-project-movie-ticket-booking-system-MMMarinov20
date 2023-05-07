@@ -18,6 +18,7 @@ namespace TicketSystem {
 		WelcomeScreen(void)
 		{
 			InitializeComponent();
+			//void InitializeCinema();
 			//
 			//TODO: Add the constructor code here
 			//
@@ -35,29 +36,22 @@ namespace TicketSystem {
 			}
 		}
 	private: System::Windows::Forms::Label^ heading;
+	private: System::Windows::Forms::Label^ cinemaHeading;
 	private: System::Windows::Forms::Button^ btnBook;
 	private: System::Windows::Forms::Button^ btnExit;
-
-
-
-
-	protected:
-
-	protected:
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
 		/// the contents of this method with the code editor.
 		/// </summary>
-		void InitializeComponent(void)
-		{
+		void InitializeComponent(void) {
 			this->heading = (gcnew System::Windows::Forms::Label());
 			this->btnBook = (gcnew System::Windows::Forms::Button());
 			this->btnExit = (gcnew System::Windows::Forms::Button());
@@ -128,18 +122,17 @@ namespace TicketSystem {
 			this->Load += gcnew System::EventHandler(this, &WelcomeScreen::WelcomeScreen_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
-
 		}
+		void InitializeCinema();
 #pragma endregion
-	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
-	}
+	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
+	private: System::Void cinemaHeadingListener(System::Object^ sender, System::EventArgs^ e) {}
 	private: System::Void btnBookListener(System::Object^ sender, System::EventArgs^ e) {
-		this->Hide();
+		this->InitializeCinema();
+		this->btnBook->Visible = false;
+		this->btnExit->Visible = false;
 	}
-	private: System::Void btnExitListener(System::Object^ sender, System::EventArgs^ e) {
-		Application::Exit();
-	}
-private: System::Void WelcomeScreen_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-};
+	private: System::Void btnExitListener(System::Object^ sender, System::EventArgs^ e) {Application::Exit();}
+	private: System::Void WelcomeScreen_Load(System::Object^ sender, System::EventArgs^ e) {}
+	};
 }
