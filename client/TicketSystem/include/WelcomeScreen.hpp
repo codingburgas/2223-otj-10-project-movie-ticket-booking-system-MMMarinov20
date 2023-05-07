@@ -1,6 +1,6 @@
 #pragma once
 
-namespace CppCLRWinFormsProject {
+namespace TicketSystem {
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -10,12 +10,12 @@ namespace CppCLRWinFormsProject {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Summary for Form1
+	/// Summary for WelcomeScreen
 	/// </summary>
-	public ref class Form1 : public System::Windows::Forms::Form
+	public ref class WelcomeScreen : public System::Windows::Forms::Form
 	{
 	public:
-		Form1(void)
+		WelcomeScreen(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace CppCLRWinFormsProject {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~Form1()
+		~WelcomeScreen()
 		{
 			if (components)
 			{
@@ -75,7 +75,7 @@ namespace CppCLRWinFormsProject {
 			this->heading->TabIndex = 0;
 			this->heading->Text = L"WELCOME TO CINEMA CITY";
 			this->heading->TextAlign = System::Drawing::ContentAlignment::TopCenter;
-			this->heading->Click += gcnew System::EventHandler(this, &Form1::label1_Click);
+			this->heading->Click += gcnew System::EventHandler(this, &WelcomeScreen::label1_Click);
 			// 
 			// btnBook
 			// 
@@ -93,7 +93,7 @@ namespace CppCLRWinFormsProject {
 			this->btnBook->TabIndex = 1;
 			this->btnBook->Text = L"Book tickets";
 			this->btnBook->UseVisualStyleBackColor = false;
-			this->btnBook->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			this->btnBook->Click += gcnew System::EventHandler(this, &WelcomeScreen::btnBookListener);
 			// 
 			// btnExit
 			// 
@@ -111,9 +111,9 @@ namespace CppCLRWinFormsProject {
 			this->btnExit->TabIndex = 2;
 			this->btnExit->Text = L"Exit";
 			this->btnExit->UseVisualStyleBackColor = false;
-			this->btnExit->Click += gcnew System::EventHandler(this, &Form1::btnExitListener);
+			this->btnExit->Click += gcnew System::EventHandler(this, &WelcomeScreen::btnExitListener);
 			// 
-			// Form1
+			// WelcomeScreen
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -123,8 +123,9 @@ namespace CppCLRWinFormsProject {
 			this->Controls->Add(this->btnExit);
 			this->Controls->Add(this->btnBook);
 			this->Controls->Add(this->heading);
-			this->Name = L"Form1";
-			this->Text = L"Form1";
+			this->Name = L"WelcomeScreen";
+			this->Text = L"WelcomeScreen";
+			this->Load += gcnew System::EventHandler(this, &WelcomeScreen::WelcomeScreen_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -132,10 +133,13 @@ namespace CppCLRWinFormsProject {
 #pragma endregion
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btnBookListener(System::Object^ sender, System::EventArgs^ e) {
+		this->Hide();
 	}
 	private: System::Void btnExitListener(System::Object^ sender, System::EventArgs^ e) {
 		Application::Exit();
 	}
+private: System::Void WelcomeScreen_Load(System::Object^ sender, System::EventArgs^ e) {
+}
 };
 }
