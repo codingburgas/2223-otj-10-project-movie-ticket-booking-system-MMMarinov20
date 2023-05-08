@@ -133,6 +133,7 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Movies.hpp" />
     <ClInclude Include="include\WelcomeScreen.hpp">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClCompile Include="src\AssemblyInfo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Movies.cpp" />
     <ClCompile Include="src\WelcomeScreen.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
