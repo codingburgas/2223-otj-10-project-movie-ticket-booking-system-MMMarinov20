@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include "Movies.hpp"
 namespace TicketSystem {
 
 	using namespace System;
@@ -126,6 +127,7 @@ namespace TicketSystem {
 
 		   }
 		   void ChooseCinema();
+		   Movies^ movies = gcnew Movies();
 #pragma endregion
 	private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {}
 	private: System::Void cinemaHeadingListener(System::Object^ sender, System::EventArgs^ e) {}

@@ -85,4 +85,9 @@ System::Void TicketSystem::WelcomeScreen::btnChooseListener(System::Object^ send
 	else if (this->option3->Checked) this->cinemaName->Text = this->option3->Text;
 	else this->cinemaName->Text = "No cinema selected";
 	
+	this->movies->fetchMovies();
+	this->cinemaName->Text = this->movies->getMovies();
+	//create a new movies form
+	this->Hide();
+	this->movies->Show();
 }
