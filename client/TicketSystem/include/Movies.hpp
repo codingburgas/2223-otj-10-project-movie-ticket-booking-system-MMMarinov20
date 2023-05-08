@@ -27,9 +27,11 @@ public:
 	}
 	void fetchMovies();
 	String^ getMovies();
-	//create array of type String^
-	
+
 	cli::array<String^>^ movies = gcnew cli::array<String^>(100);
+	cli::array<String^>^ captions = gcnew cli::array<String^>(100);
+	cli::array<String^>^ years = gcnew cli::array<String^>(100);
+	cli::array<String^>^ url = gcnew cli::array<String^>(100);
 
 	private: System::Windows::Forms::Label^ movieName;
 
@@ -47,7 +49,7 @@ public:
 		this->PerformLayout();
 
 		fetchMovies();
-		this->movieName->Text = movies[0];
+		this->movieName->Text = url[0];
 		this->Controls->Add(this->movieName);
 		this->movieName->Location = System::Drawing::Point(100, 100);
 		this->movieName->AutoSize = true;
