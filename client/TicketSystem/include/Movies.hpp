@@ -52,20 +52,7 @@ private:
 		this->PerformLayout();
 
 		fetchMovies();
-		//this->movieName->Text = url[0];
 
-		// Create a new panel
-		System::Windows::Forms::Panel^ moviePanel = gcnew System::Windows::Forms::Panel();
-
-		// Set panel properties
-		moviePanel->Location = System::Drawing::Point(0, 0);
-		moviePanel->Size = System::Drawing::Size(1264, 681);
-		moviePanel->AutoScroll = true;
-
-		// Add panel to form
-		this->Controls->Add(moviePanel);
-
-		// Add movie title labels to panel
 		for (int i = 0; i < movies->Length; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -73,10 +60,14 @@ private:
 				movieLabels[i * 4 + j] = gcnew Label();
 				movieLabels[i * 4 + j]->AutoSize = true;
 				movieLabels[i * 4 + j]->Location = System::Drawing::Point(100 + j * 200, 100 + i * 50);
-				moviePanel->Controls->Add(movieLabels[i * 4 + j]);
+				this->Controls->Add(movieLabels[i * 4 + j]);
 			}
 		}
 
+		for (int i = 0; i < movies->Length; i++)
+		{
+			movieLabels[i * 4]->Text = movies[i];
+		}
 		this->Controls->Add(this->movieName);
 		this->movieName->Location = System::Drawing::Point(100, 100);
 		this->movieName->AutoSize = true;
