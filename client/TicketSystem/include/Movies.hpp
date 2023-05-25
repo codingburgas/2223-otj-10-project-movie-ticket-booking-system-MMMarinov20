@@ -50,8 +50,8 @@ private:
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 		this->BackColor = System::Drawing::Color::IndianRed;
 		this->ClientSize = System::Drawing::Size(1264, 681);
-		this->Name = L"WelcomeScreen";
-		this->Text = L"WelcomeScreen";
+		this->Name = L"Movies";
+		this->Text = L"Movies";
 		this->ResumeLayout(false);
 		this->PerformLayout();
 
@@ -74,12 +74,17 @@ private:
 				captionLabels[i * 4 + j]->Font = (gcnew System::Drawing::Font(L"Arial", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 					static_cast<System::Byte>(0)));
 				captionLabels[i * 4 + j]->Location = System::Drawing::Point(100 + (j * 300), 150 + (i * 300));
-				/*movieImages[i * 4 + j] = gcnew PictureBox();
+				movieImages[i * 4 + j] = gcnew PictureBox();
 				movieImages[i * 4 + j]->Location = System::Drawing::Point(100 + j * 200, 100 + i * 50);
 				movieImages[i * 4 + j]->Size = System::Drawing::Size(100, 50);
 				movieImages[i * 4 + j]->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 				movieImages[i * 4 + j]->TabIndex = 0;
-				movieImages[i * 4 + j]->TabStop = false;*/
+				movieImages[i * 4 + j]->TabStop = false;
+
+				int index = (i * 4) + j;
+				if (index < url->Length) {
+					movieImages[index]->ImageLocation = url[index];
+				}
 				this->Controls->Add(movieLabels[i * 4 + j]);
 				this->Controls->Add(captionLabels[i * 4 + j]);
 				this->Controls->Add(movieImages[i * 4 + j]);
@@ -89,10 +94,7 @@ private:
 		for (int i = 0; i < movies->Length; i++)
 		{
 			movieLabels[i * 4]->Text = movies[i];
-	
 			captionLabels[i * 4]->Text = captions[i];
-			//movieImages[i]->ImageLocation = url[i];
-			//movieImages[i]->Load(url[i]);
 		}
 		this->Controls->Add(this->movieName);
 		this->movieName->Location = System::Drawing::Point(100, 100);
