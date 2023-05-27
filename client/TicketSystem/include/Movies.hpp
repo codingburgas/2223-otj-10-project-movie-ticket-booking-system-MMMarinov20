@@ -25,7 +25,17 @@ public:
 	Movies(void) {
 		InitializeComponent();
 	}
+
+	value struct Movie {
+		String^ title;
+		String^ url;
+		int year;
+		String^ caption;
+		String^ type;
+	};
 	void fetchMovies();
+	void handleMovieClick(Movie movie);
+	void handleMovieClick(System::Object^ sender, System::EventArgs^ e);
 	String^ getMovies();
 
 	cli::array<String^>^ movies = gcnew cli::array<String^>(100);
@@ -38,13 +48,14 @@ public:
 
 private:
 	System::Windows::Forms::Label^ movieName;
-
+	System::Windows::Forms::Label^ heading;
 	void InitializeComponent(void) {
 		this->movieName = (gcnew System::Windows::Forms::Label());
 		this->SuspendLayout();
 		movieLabels = gcnew cli::array<Label^>(movies->Length * 4);
 		captionLabels = gcnew cli::array<Label^>(movies->Length * 4);
 		movieImages = gcnew cli::array<PictureBox^>(movies->Length * 4);
+		this->heading = (gcnew System::Windows::Forms::Label());
 
 		this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
@@ -55,6 +66,17 @@ private:
 		this->ResumeLayout(false);
 		this->PerformLayout();
 
+		this->heading->AutoSize = true;
+		this->heading->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 24, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0)));
+		this->heading->Location = System::Drawing::Point(420, 70);
+		this->heading->Name = L"heading";
+		this->heading->Size = System::Drawing::Size(500, 31);
+		this->heading->TabIndex = 0;
+		this->heading->Text = L"Available movies in cinema 1";
+		this->heading->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+		this->Controls->Add(this->heading);
+		
+		
 		fetchMovies();
 
 		this->AutoScroll = true;
@@ -75,11 +97,13 @@ private:
 					static_cast<System::Byte>(0)));
 				captionLabels[i * 4 + j]->Location = System::Drawing::Point(100 + (j * 300), 150 + (i * 300));
 				movieImages[i * 4 + j] = gcnew PictureBox();
-				movieImages[i * 4 + j]->Location = System::Drawing::Point(100 + j * 200, 100 + i * 50);
-				movieImages[i * 4 + j]->Size = System::Drawing::Size(100, 50);
+				movieImages[i * 4 + j]->Location = System::Drawing::Point(75 + (j * 300), 200 + (i * 350));
+				movieImages[i * 4 + j]->Size = System::Drawing::Size(200, 300);
 				movieImages[i * 4 + j]->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 				movieImages[i * 4 + j]->TabIndex = 0;
 				movieImages[i * 4 + j]->TabStop = false;
+				//handle movie click
+				movieImages[i * 4 + j]->Click += gcnew System::EventHandler(this, &Movies::handleMovieClick);
 
 				int index = (i * 4) + j;
 				if (index < url->Length) {
@@ -93,8 +117,8 @@ private:
 
 		for (int i = 0; i < movies->Length; i++)
 		{
-			movieLabels[i * 4]->Text = movies[i];
-			captionLabels[i * 4]->Text = captions[i];
+			//movieLabels[i * 4]->Text = movies[i];
+			//captionLabels[i * 4]->Text = captions[i];
 		}
 		this->Controls->Add(this->movieName);
 		this->movieName->Location = System::Drawing::Point(100, 100);

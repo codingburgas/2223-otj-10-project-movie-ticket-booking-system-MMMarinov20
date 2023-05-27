@@ -77,6 +77,22 @@ String^ Movies::getMovies() {
 	return this->movieData;
 }
 
+void Movies::handleMovieClick(System::Object^ sender, System::EventArgs^ e)
+{
+	PictureBox^ clickedPictureBox = dynamic_cast<PictureBox^>(sender);
+	if (clickedPictureBox != nullptr)
+	{
+		int index = Array::IndexOf(movieImages, clickedPictureBox);
+
+		this->Hide();
+	}
+}
+
+
+void Movies::handleMovieClick(Movie movie) {
+	Console::Clear();
+}
+
 //Movies* Movies::getInstance() {
 //    if (!instance)
 //    {
