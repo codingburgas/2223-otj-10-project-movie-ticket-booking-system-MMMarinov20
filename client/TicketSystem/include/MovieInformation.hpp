@@ -33,11 +33,15 @@ public:
 	System::Windows::Forms::Label^ movieName;
 	System::Windows::Forms::PictureBox^ moviePoster;
 	System::Windows::Forms::Label^ movieCaption;
+	System::Windows::Forms::Button^ bookButton;
 	cli::array<System::Windows::Forms::Panel^>^ movieHours = gcnew cli::array<System::Windows::Forms::Panel^>(5);
 	cli::array<System::Windows::Forms::Label^>^ movieHoursLabels = gcnew cli::array<System::Windows::Forms::Label^>(5);
 private:
 	void PanelMouseEnter(Object^ sender, EventArgs^ e);
 	void PanelMouseLeave(Object^ sender, EventArgs^ e);
+	void ButtonMouseEnter(Object^ sender, EventArgs^ e);
+	void ButtonMouseLeave(Object^ sender, EventArgs^ e);
+	void ButtonClick(Object^ sender, EventArgs^ e);
 
 private:
 	void InitializeComponent(void) {
@@ -102,9 +106,25 @@ private:
 		this->movieCaption->MaximumSize = System::Drawing::Size(600, 0);
 		this->movieCaption->TabIndex = 0;
 
+		this->bookButton = (gcnew System::Windows::Forms::Button());
+		this->bookButton->Location = System::Drawing::Point(550, 550);
+		this->bookButton->Name = L"bookButton";
+		this->bookButton->Size = System::Drawing::Size(200, 50);
+		this->bookButton->TabIndex = 0;
+		this->bookButton->Text = L"Book";
+		this->bookButton->UseVisualStyleBackColor = true;
+		this->bookButton->BackColor = Color::Orange;
+		this->bookButton->ForeColor = Color::White;
+		this->bookButton->Font = gcnew System::Drawing::Font("Arial", 18, FontStyle::Bold);
+		this->bookButton->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+		this->bookButton->MouseEnter += gcnew System::EventHandler(this, &MovieInformation::ButtonMouseEnter);
+		this->bookButton->MouseLeave += gcnew System::EventHandler(this, &MovieInformation::ButtonMouseLeave);
+		this->bookButton->Click += gcnew System::EventHandler(this, &MovieInformation::ButtonClick);
+		
+		this->Controls->Add(this->bookButton);
 		this->Controls->Add(this->movieName);
 		this->Controls->Add(this->movieCaption);
-			this->Controls->Add(this->moviePoster);
+		this->Controls->Add(this->moviePoster);
 		this->ResumeLayout(false);
 	}
 
