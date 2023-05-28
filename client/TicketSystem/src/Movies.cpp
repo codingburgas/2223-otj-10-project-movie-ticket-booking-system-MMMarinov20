@@ -7,9 +7,8 @@ void Movies::fetchMovies() {
 	WebClient^ client = gcnew WebClient();
 
 	// Set API endpoint URL and headers
-	Uri^ url = gcnew Uri("https://moviesdatabase.p.rapidapi.com/titles/?year=2023");
-	client->Headers->Add("X-RapidAPI-Key", "695f25458cmsh1b721beeecf3cf3p18466ejsn05afc1a3635f");
-	client->Headers->Add("X-RapidAPI-Host", "moviesdatabase.p.rapidapi.com");
+	Uri^ url = gcnew Uri("https://api.themoviedb.org/3/trending/movie/day?api_key=637a03d7ec7ceedefb130d64c7ce936e");
+	client->Headers->Add("api_key", "637a03d7ec7ceedefb130d64c7ce936e");
 
 	try
 	{
@@ -33,38 +32,28 @@ void Movies::fetchMovies() {
 				{
 					const rapidjson::Value& result = doc["results"][i];
 
-					if (result.HasMember("titleText") && result["titleText"].IsObject())
+					if (result.HasMember("title") && result["title"].IsString())
 					{
-						const rapidjson::Value& titleText = result["titleText"];
-						if (titleText.HasMember("text") && titleText["text"].IsString())
+						String^ title = gcnew String(result["title"].GetString());
+						String^ url = "https://image.tmdb.org/t/p/w200";
+						String^ year = "";
+						String^ caption = "";
+						String^ type = "";
+
+						if (result.HasMember("poster_path") && result["poster_path"].IsString())
 						{
-							String^ title = gcnew String(titleText["text"].GetString());
-							String^ url = "";
-							int year = 0;
-							String^ caption = "";
-							String^ type = "";
-
-							if (result.HasMember("primaryImage") && result["primaryImage"].IsObject())
-							{
-								caption = gcnew String(result["primaryImage"]["caption"]["plainText"].GetString());
-								url = gcnew String(result["primaryImage"]["url"].GetString());
-							}
-
-							if (result.HasMember("releaseYear") && result["releaseYear"].IsObject())
-							{
-								year = result["releaseYear"]["year"].GetInt();
-
-								if (result.HasMember("type") && result["type"].IsObject()) type = gcnew String(result["type"].GetString());
-							}
-							//this->movies[i] = title;
-							//this->captions[i] = caption;
-							//this->url[i] = url;
-							//this->years[i] = year.ToString();
-							this->movieArray[i]->title = title;
-							this->movieArray[i]->caption = caption;
-							this->movieArray[i]->url = url;
-							//this->movieArray[i]->year = year.ToString();
+							caption = gcnew String(result["overview"].GetString());
+							url += gcnew String(result["poster_path"].GetString());
 						}
+
+						if (result.HasMember("release_date") && result["release_date"].IsString())
+						{
+							//year = result["release_date"].GetString();
+						}
+						this->movieArray[i]->title = title;
+						this->movieArray[i]->caption = caption;
+						this->movieArray[i]->url = url;
+						this->movieArray[i]->year = year;
 					}
 				}
 			}
@@ -91,6 +80,8 @@ void Movies::handleMovieClick(System::Object^ sender, System::EventArgs^ e)
 		this->Hide();
 		this->movieInformation->Show();
 		this->movieInformation->movieName->Text = movieArray[index]->title;
+		this->movieInformation->moviePoster->ImageLocation = movieArray[index]->url;
+		this->movieInformation->movieCaption->Text = movieArray[index]->caption;
 	}
 }
 

@@ -30,7 +30,7 @@ public:
 	value struct Movie {
 		String^ title;
 		String^ url;
-		int year;
+		String^ year;
 		String^ caption;
 		String^ type;
 	};
