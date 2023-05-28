@@ -133,6 +133,7 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\MovieInformation.hpp" />
     <ClInclude Include="include\Movies.hpp" />
     <ClInclude Include="include\WelcomeScreen.hpp">
       <FileType>CppForm</FileType>
