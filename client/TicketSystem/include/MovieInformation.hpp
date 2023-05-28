@@ -20,7 +20,7 @@ public:
 	value struct Movie {
 		String^ title;
 		String^ url;
-		int year;
+		String^ year;
 		String^ caption;
 		String^ type;
 	};
@@ -31,17 +31,29 @@ public:
 
 	Movie currMovie;
 	System::Windows::Forms::Label^ movieName;
+	System::Windows::Forms::PictureBox^ moviePoster;
+	System::Windows::Forms::Label^ movieCaption;
 private:
     void InitializeComponent(void) {
         this->Hide();
         this->SuspendLayout();
-        this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
-        this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-        this->ClientSize = System::Drawing::Size(800, 450);
+		this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+		this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+		this->BackColor = System::Drawing::Color::IndianRed;
+		this->ClientSize = System::Drawing::Size(1264, 681);
 
         // Update the Name and Text properties of the form
         this->Name = L"MovieInformationForm";
         this->Text = L"Movie Information";
+
+		this->moviePoster = (gcnew System::Windows::Forms::PictureBox());
+		this->moviePoster->Location = System::Drawing::Point(100, 100);
+		this->moviePoster->Name = L"moviePoster";
+		this->moviePoster->Size = System::Drawing::Size(400, 500);
+		this->moviePoster->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+		this->moviePoster->TabIndex = 0;
+		this->moviePoster->TabStop = false;
+		
 
         this->movieName = (gcnew System::Windows::Forms::Label());
         this->movieName->AutoSize = true;
@@ -50,7 +62,16 @@ private:
         this->movieName->Size = System::Drawing::Size(35, 13);
         this->movieName->TabIndex = 0;
 
+		this->movieCaption = (gcnew System::Windows::Forms::Label());
+		this->movieCaption->AutoSize = true;
+		this->movieCaption->Location = System::Drawing::Point(12, 9);
+		this->movieCaption->Name = L"movieCaption";
+		this->movieCaption->Size = System::Drawing::Size(35, 13);
+		this->movieCaption->TabIndex = 0;
+
         this->Controls->Add(this->movieName);
+		this->Controls->Add(this->movieCaption);
+		this->Controls->Add(this->moviePoster);
         this->ResumeLayout(false);
     }
 
