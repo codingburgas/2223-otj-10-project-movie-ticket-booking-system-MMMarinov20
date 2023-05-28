@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClCompile Include="src\AssemblyInfo.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\MovieInformation.cpp" />
     <ClCompile Include="src\Movies.cpp" />
     <ClCompile Include="src\WelcomeScreen.cpp" />
     <ClCompile Include="src\pch.cpp">
