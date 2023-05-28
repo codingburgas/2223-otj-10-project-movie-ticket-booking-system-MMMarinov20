@@ -56,10 +56,14 @@ void Movies::fetchMovies() {
 
 								if (result.HasMember("type") && result["type"].IsObject()) type = gcnew String(result["type"].GetString());
 							}
-							this->movies[i] = title;
-							this->captions[i] = caption;
-							this->url[i] = url;
-							this->years[i] = year.ToString();
+							//this->movies[i] = title;
+							//this->captions[i] = caption;
+							//this->url[i] = url;
+							//this->years[i] = year.ToString();
+							this->movieArray[i]->title = title;
+							this->movieArray[i]->caption = caption;
+							this->movieArray[i]->url = url;
+							//this->movieArray[i]->year = year.ToString();
 						}
 					}
 				}
@@ -85,6 +89,8 @@ void Movies::handleMovieClick(System::Object^ sender, System::EventArgs^ e)
 		int index = Array::IndexOf(movieImages, clickedPictureBox);
 
 		this->Hide();
+		this->movieInformation->Show();
+		this->movieInformation->movieName->Text = movieArray[index]->title;
 	}
 }
 
@@ -92,11 +98,3 @@ void Movies::handleMovieClick(System::Object^ sender, System::EventArgs^ e)
 void Movies::handleMovieClick(Movie movie) {
 	Console::Clear();
 }
-
-//Movies* Movies::getInstance() {
-//    if (!instance)
-//    {
-//        instance = new Movies();
-//    }
-//    return instance;
-//}

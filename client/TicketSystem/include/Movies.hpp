@@ -7,6 +7,7 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/istreamwrapper.h"
 #include "rapidjson/error/en.h"
+#include "MovieInformation.hpp"
 #using <System.dll>
 
 using namespace System;
@@ -45,11 +46,16 @@ public:
 	cli::array<Label^>^ movieLabels;
 	cli::array<Label^>^ captionLabels;
 	cli::array<PictureBox^>^ movieImages;
+	cli::array<Movie^>^ movieArray = gcnew cli::array<Movie^>(100);
 
 private:
 	System::Windows::Forms::Label^ movieName;
 	System::Windows::Forms::Label^ heading;
+	MovieInformation^ movieInformation = gcnew MovieInformation();
 	void InitializeComponent(void) {
+		for (int i = 0; i < 100; i++) {
+			movieArray[i] = gcnew Movie();
+		}
 		this->movieName = (gcnew System::Windows::Forms::Label());
 		this->SuspendLayout();
 		movieLabels = gcnew cli::array<Label^>(movies->Length * 4);
@@ -107,7 +113,7 @@ private:
 
 				int index = (i * 4) + j;
 				if (index < url->Length) {
-					movieImages[index]->ImageLocation = url[index];
+					movieImages[index]->ImageLocation = this->movieArray[index]->url;
 				}
 				this->Controls->Add(movieLabels[i * 4 + j]);
 				this->Controls->Add(captionLabels[i * 4 + j]);
@@ -117,7 +123,9 @@ private:
 
 		for (int i = 0; i < movies->Length; i++)
 		{
-			//movieLabels[i * 4]->Text = movies[i];
+			//movieArray[i * 4]->title = movies[i];
+			//movieArray[i * 4]->caption = captions[i];
+			//movieLabels[i * 4]->Text = movieArray[i]->title;
 			//captionLabels[i * 4]->Text = captions[i];
 		}
 		this->Controls->Add(this->movieName);

@@ -87,7 +87,6 @@ System::Void TicketSystem::WelcomeScreen::btnChooseListener(System::Object^ send
 	
 	this->movies->fetchMovies();
 	this->cinemaName->Text = this->movies->getMovies();
-	//create a new movies form
-	this->Hide();
+	//this->Hide();
 	this->movies->Show();
 }
