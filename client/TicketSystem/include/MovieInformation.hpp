@@ -37,14 +37,20 @@ public:
 	cli::array<System::Windows::Forms::Panel^>^ movieHours = gcnew cli::array<System::Windows::Forms::Panel^>(5);
 	cli::array<System::Windows::Forms::Label^>^ movieHoursLabels = gcnew cli::array<System::Windows::Forms::Label^>(5);
 private:
+	bool isHourSelected = false;
+	String^ selectedHour;
+	cli::array<String^>^ hours = gcnew cli::array<String^>(5);
 	void PanelMouseEnter(Object^ sender, EventArgs^ e);
 	void PanelMouseLeave(Object^ sender, EventArgs^ e);
 	void ButtonMouseEnter(Object^ sender, EventArgs^ e);
 	void ButtonMouseLeave(Object^ sender, EventArgs^ e);
+	void PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+	void ButtonMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 	void ButtonClick(Object^ sender, EventArgs^ e);
 
 private:
 	void InitializeComponent(void) {
+		for (int i = 0, j = 12; i < 5; i++) hours[i] = gcnew String(j++ + ":00");
 		for (int i = 0; i < 5; i++) {
 			movieHours[i] = (gcnew System::Windows::Forms::Panel());
 			movieHoursLabels[i] = (gcnew System::Windows::Forms::Label());
@@ -57,16 +63,18 @@ private:
 			movieHours[i]->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			movieHours[i]->MouseEnter += gcnew System::EventHandler(this, &MovieInformation::PanelMouseEnter);
 			movieHours[i]->MouseLeave += gcnew System::EventHandler(this, &MovieInformation::PanelMouseLeave);
-			
+			movieHours[i]->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MovieInformation::PanelMouseClick);
+
 			movieHoursLabels[i]->AutoSize = true;
 			movieHoursLabels[i]->Name = L"movieHoursLabel" + i;
 			movieHoursLabels[i]->TabIndex = 0;
-			movieHoursLabels[i]->Text = "12:00";
+			movieHoursLabels[i]->Text = hours[i];
 			movieHoursLabels[i]->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 12.0f, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0));
 			movieHoursLabels[i]->ForeColor = System::Drawing::Color::White;
 			movieHoursLabels[i]->Location = System::Drawing::Point(25 + (movieHours[i]->Width - movieHoursLabels[i]->Width) / 2, (movieHours[i]->Height - movieHoursLabels[i]->Height) / 2);
 			movieHoursLabels[i]->MouseEnter += gcnew System::EventHandler(this, &MovieInformation::PanelMouseEnter);
 			movieHoursLabels[i]->MouseLeave += gcnew System::EventHandler(this, &MovieInformation::PanelMouseLeave);
+			movieHoursLabels[i]->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MovieInformation::ButtonMouseClick);
 			this->Controls->Add(this->movieHours[i]);
 			this->movieHours[i]->Controls->Add(this->movieHoursLabels[i]);
 		}
