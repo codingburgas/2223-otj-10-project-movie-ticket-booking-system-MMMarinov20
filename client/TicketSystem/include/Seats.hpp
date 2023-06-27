@@ -32,6 +32,26 @@ private:
 		this->Name = L"Seats";
 		this->Text = L"Seats";
 
-		this->ResumeLayout(false);
-	};
+		int x = 160;
+		int y = 100;
+		int seatNumber = 1;
+		for (int i = 0; i < 100; i++) {
+			seats[i] = (gcnew System::Windows::Forms::Panel());
+			seats[i]->SuspendLayout();
+			seats[i]->BackColor = System::Drawing::Color::Gray;
+			seats[i]->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			seats[i]->Location = System::Drawing::Point(x, y);
+			seats[i]->Name = L"seat" + seatNumber;
+			seats[i]->Size = System::Drawing::Size(50, 50);
+			seats[i]->TabIndex = 0;
+			this->Controls->Add(seats[i]);
+			seats[i]->ResumeLayout(false);
+			x += 100;
+			seatNumber++;
+			if (seatNumber % 10 == 0) {
+				x = 160;
+				y += 50;
+			}
+		}
+	}
 };
