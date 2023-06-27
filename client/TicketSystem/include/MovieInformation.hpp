@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <array>
+#include "Seats.hpp"
 #using <System.dll>
 
 using namespace System;
@@ -58,15 +59,15 @@ private:
 			movieHours[i]->BackColor = Color::Orange;
 			movieHours[i]->Size = System::Drawing::Size(80, 50);
 			movieHours[i]->Location = System::Drawing::Point(550 + (i * 100), 470);
-			movieHours[i]->Name = L"movieHours" + i;
+			movieHours[i]->Name = hours[i];
 			movieHours[i]->TabIndex = 0;
 			movieHours[i]->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			movieHours[i]->MouseEnter += gcnew System::EventHandler(this, &MovieInformation::PanelMouseEnter);
 			movieHours[i]->MouseLeave += gcnew System::EventHandler(this, &MovieInformation::PanelMouseLeave);
 			movieHours[i]->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MovieInformation::PanelMouseClick);
-
+		
 			movieHoursLabels[i]->AutoSize = true;
-			movieHoursLabels[i]->Name = L"movieHoursLabel" + i;
+			movieHoursLabels[i]->Name = hours[i];
 			movieHoursLabels[i]->TabIndex = 0;
 			movieHoursLabels[i]->Text = hours[i];
 			movieHoursLabels[i]->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 12.0f, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point, static_cast<System::Byte>(0));

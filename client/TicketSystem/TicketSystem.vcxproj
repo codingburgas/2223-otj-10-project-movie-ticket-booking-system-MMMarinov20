@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="include\MovieInformation.hpp" />
     <ClInclude Include="include\Movies.hpp" />
+    <ClInclude Include="include\Seats.hpp" />
     <ClInclude Include="include\WelcomeScreen.hpp">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -146,6 +147,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\MovieInformation.cpp" />
     <ClCompile Include="src\Movies.cpp" />
+    <ClCompile Include="src\Seats.cpp" />
     <ClCompile Include="src\WelcomeScreen.cpp" />
     <ClCompile Include="src\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
