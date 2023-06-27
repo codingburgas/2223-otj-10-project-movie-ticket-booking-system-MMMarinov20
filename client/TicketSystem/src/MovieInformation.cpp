@@ -33,11 +33,15 @@ void MovieInformation::ButtonMouseLeave(Object^ sender, EventArgs^ e) {
 	}
 }
 
-void MovieInformation::ButtonClick(Object^ sender, EventArgs^ e) {}
+void MovieInformation::ButtonClick(Object^ sender, EventArgs^ e) {
+	Seats^ seats = gcnew Seats();
+	seats->Show();
+}
 
 void MovieInformation::PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e)
 {
 	this->isHourSelected = true;
+	this->selectedHour = dynamic_cast<Panel^>(sender)->Controls[0]->Text;
 	Panel^ panel = dynamic_cast<Panel^>(sender);
 	
 	if (panel != nullptr) {
@@ -46,6 +50,7 @@ void MovieInformation::PanelMouseClick(System::Object^ sender, System::Windows::
 };
 
 void MovieInformation::ButtonMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	this->selectedHour = dynamic_cast<Button^>(sender)->Name;
 	Button^ button = dynamic_cast<Button^>(sender);
 	
 	if (button != nullptr) {
