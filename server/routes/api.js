@@ -10,3 +10,10 @@ module.exports = router;
 router.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
+router.get("/tickets", (req, res) => {
+  db.query("SELECT * FROM tickets", (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
