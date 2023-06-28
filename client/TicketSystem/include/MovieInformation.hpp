@@ -4,6 +4,10 @@
 #include <array>
 #include "Seats.hpp"
 #using <System.dll>
+#include <vcclr.h> // Required for interop
+
+using namespace System;
+using namespace System::Data::SqlClient;
 
 using namespace System;
 using namespace System::ComponentModel;
