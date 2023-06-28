@@ -38,3 +38,14 @@ void Seats::PanelMouseLeave(System::Object^ sender, System::EventArgs^ e) {
 	System::Windows::Forms::Panel^ panel = (System::Windows::Forms::Panel^)sender;
 	panel->Cursor = System::Windows::Forms::Cursors::Default;
 }
+
+void Seats::ButtonClick(System::Object^ sender, System::EventArgs^ e) {
+	System::Windows::Forms::Button^ button = (System::Windows::Forms::Button^)sender;
+	for (int i = 0; i < 100; i++) {
+		if (seatsArray[i]->isSelected == true) {
+			seatsArray[i]->isTaken = true;
+			seatsArray[i]->isSelected = false;
+			seats[i]->BackColor = System::Drawing::Color::Red;
+		}
+	}
+}

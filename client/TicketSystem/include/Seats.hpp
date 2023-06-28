@@ -29,8 +29,8 @@ public:
 		String^ seatType;
 	};
 	cli::array<System::Windows::Forms::Panel^>^ seats = gcnew cli::array<System::Windows::Forms::Panel^>(100);
-
 	cli::array<Seat^>^ seatsArray = gcnew cli::array<Seat^>(100);
+	System::Windows::Forms::Button^ bookButton;
 
 private:
 	void InitializeComponent(void) {
@@ -41,6 +41,12 @@ private:
 		this->ClientSize = System::Drawing::Size(1264, 681);
 		this->Name = L"Seats";
 		this->Text = L"Seats";
+		bookButton = gcnew System::Windows::Forms::Button();
+		bookButton->Location = System::Drawing::Point(1000, 600);
+		bookButton->Size = System::Drawing::Size(200, 50);
+		bookButton->Text = "Book";
+		bookButton->Click += gcnew System::EventHandler(this, &Seats::ButtonClick);
+		this->Controls->Add(bookButton);
 
 		int x = 160;
 		int y = 100;
@@ -85,5 +91,6 @@ private:
 	void PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
 	void PanelMouseEnter(System::Object^ sender, System::EventArgs^ e);
 	void PanelMouseLeave(System::Object^ sender, System::EventArgs^ e);
+	void ButtonClick(System::Object^ sender, System::EventArgs^ e);
 	void GenerateRandomSeats();
 };
