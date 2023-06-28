@@ -12,3 +12,29 @@ void Seats::GenerateRandomSeats() {
 		else i--;
 	}
 }
+
+void Seats::PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	System::Windows::Forms::Panel^ panel = (System::Windows::Forms::Panel^)sender;
+	int index = Int32::Parse(panel->Name->Substring(4));
+	if (seatsArray[index]->isTaken == false) {
+		panel->Cursor = System::Windows::Forms::Cursors::Hand;
+		if (seatsArray[index]->isSelected == false) {
+			seatsArray[index]->isSelected = true;
+			seats[index]->BackColor = System::Drawing::Color::Green;
+		}
+		else {
+			seatsArray[index]->isSelected = false;
+			seats[index]->BackColor = System::Drawing::Color::Gray;
+		}
+	}
+}
+
+void Seats::PanelMouseEnter(System::Object^ sender, System::EventArgs^ e) {
+	System::Windows::Forms::Panel^ panel = (System::Windows::Forms::Panel^)sender;
+	panel->Cursor = System::Windows::Forms::Cursors::Hand;
+}
+
+void Seats::PanelMouseLeave(System::Object^ sender, System::EventArgs^ e) {
+	System::Windows::Forms::Panel^ panel = (System::Windows::Forms::Panel^)sender;
+	panel->Cursor = System::Windows::Forms::Cursors::Default;
+}

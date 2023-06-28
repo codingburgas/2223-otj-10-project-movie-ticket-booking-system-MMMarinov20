@@ -44,7 +44,7 @@ private:
 
 		int x = 160;
 		int y = 100;
-		int seatNumber = 1;
+		int seatNumber = 0;
 		for (int i = 0; i < 100; i++) {
 			int row = i / 10;
 			String^ seatType;
@@ -59,10 +59,9 @@ private:
 			seats[i]->BackColor = System::Drawing::Color::Gray;
 			seats[i]->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			seats[i]->Location = System::Drawing::Point(x, y);
-			seats[i]->Name = L"seat" + seatNumber;
+			seats[i]->Name = "seat" + seatNumber;
 			seats[i]->Size = System::Drawing::Size(50, 50);
 			seats[i]->TabIndex = 0;
-			//if(!seatsArray[i]->isTaken) seats[i]->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Seats::PanelMouseClick);
 			this->Controls->Add(seats[i]);
 			seats[i]->ResumeLayout(false);
 			x += 100;
@@ -73,8 +72,18 @@ private:
 			}
 		}
 		this->GenerateRandomSeats();
+
+		for (int i = 0; i < 100; i++) {
+			if (!seatsArray[i]->isTaken) {
+				seats[i]->MouseEnter += gcnew System::EventHandler(this, &Seats::PanelMouseEnter);
+				seats[i]->MouseLeave += gcnew System::EventHandler(this, &Seats::PanelMouseLeave);
+				seats[i]->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Seats::PanelMouseClick);
+			}
+		}
 	}
 private:
-	//void PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+	void PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+	void PanelMouseEnter(System::Object^ sender, System::EventArgs^ e);
+	void PanelMouseLeave(System::Object^ sender, System::EventArgs^ e);
 	void GenerateRandomSeats();
 };
