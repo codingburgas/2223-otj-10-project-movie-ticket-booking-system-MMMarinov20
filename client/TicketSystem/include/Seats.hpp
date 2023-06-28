@@ -21,7 +21,17 @@ public:
 		InitializeComponent();
 	}
 
+	value struct Seat {
+		int number;
+		int row;
+		bool isTaken;
+		bool isSelected;
+		String^ seatType;
+	};
 	cli::array<System::Windows::Forms::Panel^>^ seats = gcnew cli::array<System::Windows::Forms::Panel^>(100);
+
+	cli::array<Seat^>^ seatsArray = gcnew cli::array<Seat^>(100);
+
 private:
 	void InitializeComponent(void) {
 		this->SuspendLayout();
@@ -36,6 +46,14 @@ private:
 		int y = 100;
 		int seatNumber = 1;
 		for (int i = 0; i < 100; i++) {
+			int row = i / 10;
+			String^ seatType;
+			//silver, gold, platinum
+			if (i < 20) seatType = "silver";
+			else if (i < 40) seatType = "gold";
+			else seatType = "platinum";
+			Seat seat = {seatNumber, row, false, false, seatType};
+			seatsArray[i] = seat;
 			seats[i] = (gcnew System::Windows::Forms::Panel());
 			seats[i]->SuspendLayout();
 			seats[i]->BackColor = System::Drawing::Color::Gray;
@@ -44,6 +62,7 @@ private:
 			seats[i]->Name = L"seat" + seatNumber;
 			seats[i]->Size = System::Drawing::Size(50, 50);
 			seats[i]->TabIndex = 0;
+			//if(!seatsArray[i]->isTaken) seats[i]->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Seats::PanelMouseClick);
 			this->Controls->Add(seats[i]);
 			seats[i]->ResumeLayout(false);
 			x += 100;
@@ -53,5 +72,9 @@ private:
 				y += 50;
 			}
 		}
+		this->GenerateRandomSeats();
 	}
+private:
+	//void PanelMouseClick(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e);
+	void GenerateRandomSeats();
 };
